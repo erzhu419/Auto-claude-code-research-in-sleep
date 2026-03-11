@@ -2,6 +2,8 @@
 
 [中文版 README](README_CN.md) | English
 
+![Hero](hero_interaction.svg)
+
 ![Score Progression](auto_review_score_curve.png)
 
 > 🌙 **Let Claude Code do research while you sleep.** Wake up to find your paper scored, weaknesses identified, experiments run, and narrative rewritten — autonomously.

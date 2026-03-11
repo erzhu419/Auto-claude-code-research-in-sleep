@@ -2,6 +2,8 @@
 
 [English](README.md) | 中文版
 
+![Hero](hero_interaction.svg)
+
 ![分数曲线](auto_review_score_curve.png)
 
 > 🌙 **让 Claude Code 在你睡觉时做科研。** 醒来发现论文已被打分、弱点已被定位、实验已跑完、叙事已重写——全自动。
