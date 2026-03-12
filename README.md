@@ -33,8 +33,8 @@ These skills compose into a full research lifecycle:
 ### Full Pipeline 🚀
 
 ```
-/research-lit → /novelty-check → implement → /auto-review-loop → submit
-  (survey)       (verify novel)    (code)      (review & fix)     (done!)
+/research-lit → /novelty-check → implement → /run-experiment → /auto-review-loop → submit
+  (survey)       (verify novel)    (code)      (deploy & run)    (review & fix)     (done!)
 ```
 
 ### Workflow 1: Auto Research Loop 🔁 (sleep & wake up to results)
@@ -60,12 +60,13 @@ These skills compose into a full research lifecycle:
 │   /novelty-check — verify idea isn't already published       │
 │                                                              │
 │   Supporting skills:                                         │
-│   /analyze-results  — interpret experiment outputs           │
+│   /run-experiment    — deploy to local/remote GPU            │
+│   /analyze-results   — interpret experiment outputs          │
 │   /monitor-experiment — check progress, collect results      │
 └─────────────────────────────────────────────────────────────┘
 ```
 
-**Skills involved:** `auto-review-loop` + `research-review` + `novelty-check` + `analyze-results` + `monitor-experiment`
+**Skills involved:** `auto-review-loop` + `research-review` + `novelty-check` + `run-experiment` + `analyze-results` + `monitor-experiment`
 
 **🛡️ Key safety features:**
 
