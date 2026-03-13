@@ -1,8 +1,8 @@
 # Auto-claude-code-research-in-sleep (ARIS ⚔️)
 
-[中文版 README](README_CN.md) | English
-
 ![Hero](docs/hero_combined.svg)
+
+[中文版 README](README_CN.md) | English
 
 ![Score Progression](docs/auto_review_score_curve.png)
 
