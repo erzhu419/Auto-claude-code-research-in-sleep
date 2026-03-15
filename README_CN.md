@@ -835,16 +835,17 @@ claude
 - [x] **全流程研究管线** — `/research-pipeline` 串联 Workflow 1（idea discovery）→ 实现 → Workflow 2（auto-review-loop），端到端
 - [x] **Peer Review skill** — `/peer-review` 以审稿人视角审阅他人论文，含 GPT-5.4 meta-review
 - [x] **跨模型协作架构** — Claude Code（执行者）× Codex GPT-5.4 xhigh（审稿者），避免单模型自我博弈的局部最优
+- [x] **飞书集成** — 三种模式（关闭/推送/交互），通过 `~/.claude/feishu.json` 配置。推送只需 webhook URL；交互用 [feishu-claude-code](https://github.com/joewongjc/feishu-claude-code)。默认关闭——对已有工作流零影响。见[设置指南](#-飞书lark-集成可选)
+- [x] **Zotero MCP 集成** — `/research-lit` 搜索 Zotero 文献库、读取标注/高亮、导出 BibTeX。推荐：[zotero-mcp](https://github.com/54yyyu/zotero-mcp)（1.8k⭐）。见[设置指南](#-zotero-集成可选)
+- [x] **Obsidian 集成** — `/research-lit` 搜索 Obsidian vault 中的研究笔记、标签引用、wikilinks。推荐：[mcpvault](https://github.com/bitbonsai/mcpvault)（760⭐）+ [obsidian-skills](https://github.com/kepano/obsidian-skills)（13.6k⭐）。见[设置指南](#-obsidian-集成可选)
 
 </details>
 
 ### 计划中
 
-- [x] **飞书集成** — 三种模式（关闭/推送/交互），通过 `~/.claude/feishu.json` 配置。推送只需 webhook URL；交互用 [feishu-claude-code](https://github.com/joewongjc/feishu-claude-code)。默认关闭——对已有工作流零影响。见[设置指南](#-飞书lark-集成可选)
+- [ ] **GitHub 代码同步** — 支持 `git push` → 服务器 `git pull` 替代 `rsync` over SSH。好处：无需本地直连 SSH、部署有版本记录、一次 push 多台服务器同步
 - [ ] **W&B 集成** — 从 Weights & Biases 拉取训练曲线和指标作为反馈信号。auto-review-loop 可读取 loss/accuracy 图诊断训练问题并建议下一步实验
   - 相关项目：[wandb-mcp-server](https://github.com/wandb/wandb-mcp-server)（W&B 官方 MCP，40⭐）或通过 `wandb api` CLI
-- [x] **Zotero MCP 集成** — `/research-lit` 搜索 Zotero 文献库、读取标注/高亮、导出 BibTeX。推荐：[zotero-mcp](https://github.com/54yyyu/zotero-mcp)（1.8k⭐）。见[设置指南](#-zotero-集成可选)
-- [x] **Obsidian 集成** — `/research-lit` 搜索 Obsidian vault 中的研究笔记、标签引用、wikilinks。推荐：[mcpvault](https://github.com/bitbonsai/mcpvault)（760⭐）+ [obsidian-skills](https://github.com/kepano/obsidian-skills)（13.6k⭐）。见[设置指南](#-obsidian-集成可选)
 - [ ] 更多执行者 × 评审者组合（Gemini、DeepSeek 等）
 - [ ] **常驻模式（Daemon mode）** — 通过 `launchd`/`systemd` 自动重启 Claude Code 会话，实现真正的无人值守运行。当前编排层需要活跃的 CLI 会话；状态文件（`REVIEW_STATE.json`、`AUTO_REVIEW.md`）支持跨会话恢复，但重启需手动操作（[#11](https://github.com/wanshuiyin/Auto-claude-code-research-in-sleep/issues/11)）
 

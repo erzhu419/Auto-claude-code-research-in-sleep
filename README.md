@@ -913,22 +913,22 @@ claude
 <summary>Show 6 more completed items</summary>
 
 - [x] **Configurable REVIEWER_MODEL** — all Codex-dependent skills support custom reviewer model (default `gpt-5.4`, also works with `gpt-5.3-codex`, `gpt-5.2-codex`, `o3`, etc.)
-
 - [x] **Local paper library scanning** — `/research-lit` scans local `papers/` and `literature/` directories before external search, leveraging papers you've already read
 - [x] **Idea Discovery pipeline** — `/idea-discovery` orchestrates research-lit → idea-creator → novelty-check → research-review in one command, with pilot experiments on GPU
 - [x] **Full research pipeline** — `/research-pipeline` chains Workflow 1 (idea discovery) → implementation → Workflow 2 (auto-review-loop) end-to-end
 - [x] **Peer review skill** — `/peer-review` for reviewing others' papers as a conference reviewer, with GPT-5.4 meta-review
 - [x] **Cross-model collaboration** — Claude Code (executor) × Codex GPT-5.4 xhigh (reviewer) architecture, avoiding single-model self-play local minima
+- [x] **Feishu/Lark integration** — three modes (off/push/interactive), configurable via `~/.claude/feishu.json`. Push-only needs just a webhook URL; interactive uses [feishu-claude-code](https://github.com/joewongjc/feishu-claude-code). Off by default — zero impact on existing workflows. See [setup guide](#-feishulark-integration-optional)
+- [x] **Zotero MCP integration** — `/research-lit` searches Zotero collections, reads annotations/highlights, exports BibTeX. Recommended: [zotero-mcp](https://github.com/54yyyu/zotero-mcp) (1.8k⭐). See [setup guide](#-zotero-integration-optional)
+- [x] **Obsidian integration** — `/research-lit` searches Obsidian vault for research notes, tagged references, wikilinks. Recommended: [mcpvault](https://github.com/bitbonsai/mcpvault) (760⭐) + [obsidian-skills](https://github.com/kepano/obsidian-skills) (13.6k⭐). See [setup guide](#-obsidian-integration-optional)
 
 </details>
 
 ### Planned
 
-- [x] **Feishu/Lark integration** — three modes (off/push/interactive), configurable via `~/.claude/feishu.json`. Push-only needs just a webhook URL; interactive uses [feishu-claude-code](https://github.com/joewongjc/feishu-claude-code). Off by default — zero impact on existing workflows. See [setup guide](#-feishulark-integration-optional)
+- [ ] **GitHub-based code sync** — support `git push` → server `git pull` as alternative to `rsync` over SSH. Benefits: no direct SSH needed, version-tracked deployments, multi-server sync with one push
 - [ ] **W&B integration** — pull training curves and metrics from Weights & Biases as feedback signal. Auto-review-loop can read loss/accuracy plots to diagnose training issues and suggest next experiments
   - Related projects: [wandb-mcp-server](https://github.com/wandb/wandb-mcp-server) (official W&B MCP, 40⭐), or via `wandb api` CLI
-- [x] **Zotero MCP integration** — `/research-lit` searches Zotero collections, reads annotations/highlights, exports BibTeX. Recommended: [zotero-mcp](https://github.com/54yyyu/zotero-mcp) (1.8k⭐). See [setup guide](#-zotero-integration-optional)
-- [x] **Obsidian integration** — `/research-lit` searches Obsidian vault for research notes, tagged references, wikilinks. Recommended: [mcpvault](https://github.com/bitbonsai/mcpvault) (760⭐) + [obsidian-skills](https://github.com/kepano/obsidian-skills) (13.6k⭐). See [setup guide](#-obsidian-integration-optional)
 - [ ] More executor × reviewer combinations (Gemini, DeepSeek, etc.)
 - [ ] **Daemon mode** — auto-restart Claude Code session via `launchd`/`systemd` for true unattended operation. Currently the orchestration layer requires an active CLI session; state files (`REVIEW_STATE.json`, `AUTO_REVIEW.md`) support resuming across sessions, but relaunch is manual ([#11](https://github.com/wanshuiyin/Auto-claude-code-research-in-sleep/issues/11))
 
