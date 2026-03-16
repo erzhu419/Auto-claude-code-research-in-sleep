@@ -788,6 +788,26 @@ Now skills will:
 
 Skills are plain Markdown files. Fork and customize:
 
+> 💡 **Parameter pass-through**: Parameters flow down the call chain automatically. For example, `/research-pipeline "topic" — sources: zotero, arxiv download: true` passes `sources` and `arxiv download` through `idea-discovery` all the way down to `research-lit`. You can set any downstream parameter at any level — just add `— key: value` to your command.
+>
+> ```
+> research-pipeline  ──→  idea-discovery  ──→  research-lit
+>                    ──→  auto-review-loop
+>                                         ──→  idea-creator
+>                                         ──→  novelty-check
+>                                         ──→  research-review
+> ```
+
+### Full Research Pipeline (`research-pipeline`)
+
+| Constant | Default | Description | Pass-through |
+|----------|---------|-------------|:---:|
+| `AUTO_PROCEED` | true | Auto-continue with top-ranked option if user doesn't respond | → `idea-discovery` |
+| `ARXIV_DOWNLOAD` | false | Download top arXiv PDFs after literature search | → `idea-discovery` → `research-lit` |
+| `HUMAN_CHECKPOINT` | false | When `true`, pause after each review round for approval | → `auto-review-loop` |
+
+Override inline: `/research-pipeline "topic" — auto proceed: false, human checkpoint: true, arxiv download: true`
+
 ### Auto Review Loop (`auto-review-loop`)
 
 | Constant | Default | Description |
@@ -798,15 +818,16 @@ Skills are plain Markdown files. Fork and customize:
 
 ### Idea Discovery (`idea-discovery` / `idea-creator`)
 
-| Constant | Default | Description |
-|----------|---------|-------------|
-| `PILOT_MAX_HOURS` | 2h | Skip any pilot estimated to take longer per GPU |
-| `PILOT_TIMEOUT_HOURS` | 3h | Hard timeout — kill runaway pilots, collect partial results |
-| `MAX_PILOT_IDEAS` | 3 | Maximum number of ideas to pilot in parallel |
-| `MAX_TOTAL_GPU_HOURS` | 8h | Total GPU budget across all pilots |
-| `AUTO_PROCEED` | true | Auto-continue with top-ranked option if user doesn't respond. Set `false` to always wait for explicit approval |
+| Constant | Default | Description | Pass-through |
+|----------|---------|-------------|:---:|
+| `PILOT_MAX_HOURS` | 2h | Skip any pilot estimated to take longer per GPU | — |
+| `PILOT_TIMEOUT_HOURS` | 3h | Hard timeout — kill runaway pilots, collect partial results | — |
+| `MAX_PILOT_IDEAS` | 3 | Maximum number of ideas to pilot in parallel | — |
+| `MAX_TOTAL_GPU_HOURS` | 8h | Total GPU budget across all pilots | — |
+| `AUTO_PROCEED` | true | Auto-continue with top-ranked option if user doesn't respond | — |
+| `ARXIV_DOWNLOAD` | false | Download top arXiv PDFs after literature search | → `research-lit` |
 
-Override inline: `/idea-discovery "topic" — pilot budget: 4h per idea, wait for my approval at each step`
+Override inline: `/idea-discovery "topic" — pilot budget: 4h per idea, sources: zotero, arxiv download: true`
 
 ### Literature Search (`research-lit`)
 
@@ -814,10 +835,22 @@ Override inline: `/idea-discovery "topic" — pilot budget: 4h per idea, wait fo
 |----------|---------|-------------|
 | `PAPER_LIBRARY` | `papers/`, `literature/` | Local directories to scan for PDFs before searching online |
 | `MAX_LOCAL_PAPERS` | 20 | Max local PDFs to scan (first 3 pages each) |
+| `SOURCES` | `all` | Which sources to search: `zotero`, `obsidian`, `local`, `web`, or `all` (comma-separated) |
 | `ARXIV_DOWNLOAD` | false | When `true`, download top relevant arXiv PDFs to PAPER_LIBRARY after search |
 | `ARXIV_MAX_DOWNLOAD` | 5 | Maximum number of PDFs to download when `ARXIV_DOWNLOAD = true` |
 
-Override inline: `/research-lit "topic" — paper library: ~/Zotero/storage/`, `/research-lit "topic" — arxiv download: true, max download: 10`
+Override inline: `/research-lit "topic" — sources: zotero, web`, `/research-lit "topic" — arxiv download: true, max download: 10`
+
+### Paper Writing (`paper-write`)
+
+| Constant | Default | Description |
+|----------|---------|-------------|
+| `DBLP_BIBTEX` | true | Fetch real BibTeX from DBLP/CrossRef instead of LLM-generated entries |
+| `TARGET_VENUE` | `ICLR` | Target venue format: `ICLR`, `NeurIPS`, `ICML` |
+| `ANONYMOUS` | true | Use anonymous author block for blind review |
+| `MAX_PAGES` | 9 | Main body page limit (excluding references) |
+
+Override inline: `/paper-write — target venue: NeurIPS, max pages: 10, dblp bibtex: false`
 
 ### General (all skills using Codex MCP)
 

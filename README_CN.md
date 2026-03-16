@@ -704,6 +704,26 @@ EOF
 
 Skills 就是普通的 Markdown 文件，fork 后随意改：
 
+> 💡 **参数自动透传**：参数沿调用链自动向下传递。例如 `/research-pipeline "方向" — sources: zotero, arxiv download: true` 会将 `sources` 和 `arxiv download` 经 `idea-discovery` 一路传到 `research-lit`。你可以在任何层级设置下游参数——只需加 `— key: value`。
+>
+> ```
+> research-pipeline  ──→  idea-discovery  ──→  research-lit
+>                    ──→  auto-review-loop
+>                                         ──→  idea-creator
+>                                         ──→  novelty-check
+>                                         ──→  research-review
+> ```
+
+### 全流程（`research-pipeline`）
+
+| 常量 | 默认值 | 说明 | 透传 |
+|------|--------|------|:---:|
+| `AUTO_PROCEED` | true | 用户不回复时自动带着最优方案继续 | → `idea-discovery` |
+| `ARXIV_DOWNLOAD` | false | 搜索后自动下载最相关的 arXiv PDF | → `idea-discovery` → `research-lit` |
+| `HUMAN_CHECKPOINT` | false | 设为 `true` 时每轮 review 后暂停等待确认 | → `auto-review-loop` |
+
+行内覆盖：`/research-pipeline "方向" — auto proceed: false, human checkpoint: true, arxiv download: true`
+
 ### 自动 Review 循环（`auto-review-loop`）
 
 | 常量 | 默认值 | 说明 |
@@ -714,15 +734,16 @@ Skills 就是普通的 Markdown 文件，fork 后随意改：
 
 ### 找 Idea（`idea-discovery` / `idea-creator`）
 
-| 常量 | 默认值 | 说明 |
-|------|--------|------|
-| `PILOT_MAX_HOURS` | 2h | 单个 pilot 预估超时则跳过 |
-| `PILOT_TIMEOUT_HOURS` | 3h | 硬超时——强制终止，收集部分结果 |
-| `MAX_PILOT_IDEAS` | 3 | 最多并行 pilot 几个 idea |
-| `MAX_TOTAL_GPU_HOURS` | 8h | 所有 pilot 的总 GPU 预算 |
-| `AUTO_PROCEED` | true | 用户不回复时自动带着最优方案继续。设 `false` 则每步都等确认 |
+| 常量 | 默认值 | 说明 | 透传 |
+|------|--------|------|:---:|
+| `PILOT_MAX_HOURS` | 2h | 单个 pilot 预估超时则跳过 | — |
+| `PILOT_TIMEOUT_HOURS` | 3h | 硬超时——强制终止，收集部分结果 | — |
+| `MAX_PILOT_IDEAS` | 3 | 最多并行 pilot 几个 idea | — |
+| `MAX_TOTAL_GPU_HOURS` | 8h | 所有 pilot 的总 GPU 预算 | — |
+| `AUTO_PROCEED` | true | 用户不回复时自动带着最优方案继续。设 `false` 则每步都等确认 | — |
+| `ARXIV_DOWNLOAD` | false | 搜索后自动下载最相关的 arXiv PDF | → `research-lit` |
 
-行内覆盖：`/idea-discovery "方向" — pilot budget: 4h per idea, 每步等我确认`
+行内覆盖：`/idea-discovery "方向" — pilot budget: 4h per idea, sources: zotero, arxiv download: true`
 
 ### 文献搜索（`research-lit`）
 
@@ -730,10 +751,22 @@ Skills 就是普通的 Markdown 文件，fork 后随意改：
 |------|--------|------|
 | `PAPER_LIBRARY` | `papers/`, `literature/` | 本地论文目录，搜外部之前先扫这里的 PDF |
 | `MAX_LOCAL_PAPERS` | 20 | 最多扫描多少本地 PDF（每篇读前 3 页） |
+| `SOURCES` | `all` | 搜索哪些源：`zotero`、`obsidian`、`local`、`web`、`all`（逗号分隔） |
 | `ARXIV_DOWNLOAD` | false | 设为 `true` 时，搜索后自动下载最相关的 arXiv PDF 到 PAPER_LIBRARY |
 | `ARXIV_MAX_DOWNLOAD` | 5 | `ARXIV_DOWNLOAD = true` 时最多下载的 PDF 数量 |
 
-行内覆盖：`/research-lit "方向" — paper library: ~/Zotero/storage/`、`/research-lit "方向" — arxiv download: true, max download: 10`
+行内覆盖：`/research-lit "方向" — sources: zotero, web`、`/research-lit "方向" — arxiv download: true, max download: 10`
+
+### 论文写作（`paper-write`）
+
+| 常量 | 默认值 | 说明 |
+|------|--------|------|
+| `DBLP_BIBTEX` | true | 从 DBLP/CrossRef 拉取真实 BibTeX，替代 LLM 生成的条目 |
+| `TARGET_VENUE` | `ICLR` | 目标会议格式：`ICLR`、`NeurIPS`、`ICML` |
+| `ANONYMOUS` | true | 匿名审稿模式 |
+| `MAX_PAGES` | 9 | 正文页数上限（不含参考文献） |
+
+行内覆盖：`/paper-write — target venue: NeurIPS, max pages: 10, dblp bibtex: false`
 
 ### 通用（所有使用 Codex MCP 的 skill）
 
