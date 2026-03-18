@@ -158,6 +158,7 @@ claude
 | Skill | 📐 [`proof-writer`](skills/proof-writer/SKILL.md) | ML 理论 | 严格的定理/引理证明撰写——可行性分类、依赖图谱、诚实的阻塞报告。搭配工作流 3（`/paper-writing`）写理论章节，或工作流 2（`/auto-review-loop`）修补 reviewer 指出的证明漏洞 | 否 |
 | Skill | 📝 [`grant-proposal`](skills/grant-proposal/SKILL.md) | 通用 | 基金申请书撰写（科研費/NSF/国自然/ERC/DFG/SNSF/ARC/NWO）。串联 `/research-lit` → `/novelty-check` → `/research-review` → `/paper-illustration` | 是 |
 | Skill | 📡 [`comm-lit-review`](skills/comm-lit-review/SKILL.md) | 通信 / 无线 | 通信领域专用文献检索——IEEE/ACM/ScienceDirect 优先、venue 分层、PHY/MAC/transport/NTN 分类 | 否 |
+| External | 📊 [CitationClaw](https://github.com/VisionXLab/CitationClaw) | 通用 | 引用影响力分析——输入论文标题 → 引用爬取、学者识别、分层统计、HTML 报告 | 否 |
 | Docs | 🐾 [OpenClaw 适配指南](docs/OPENCLAW_ADAPTATION.md) | 通用 | 在 [OpenClaw](https://github.com/All-Hands-AI/OpenHands) 中使用 ARIS 工作流方法论——skill 到阶段映射、文件化编排，无需 Claude Code CLI | 否 |
 
 ## 🔄 工作流
