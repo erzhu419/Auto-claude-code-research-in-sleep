@@ -34,13 +34,15 @@ Custom [Claude Code](https://docs.anthropic.com/en/docs/claude-code) skills for 
 /research-pipeline "factorized gap in discrete diffusion LMs"
 ```
 
-**Targeted mode** — point ARIS at a specific paper and codebase for focused research:
+**🔥 Targeted mode** — got a paper you want to improve? Give ARIS the paper + the code:
 
 ```
 /research-pipeline "improve method X" — ref paper: https://arxiv.org/abs/2406.04329, base repo: https://github.com/org/project
 ```
 
-ARIS reads the paper, summarizes its limitations, clones the codebase, and generates ideas that specifically improve *that* method with *that* code. Like telling a research assistant: "read this paper, use this repo, find what's missing."
+ARIS reads the paper → finds its weaknesses → clones the codebase → generates ideas that specifically fix *those* weaknesses with *that* code → runs experiments → writes your paper. Like telling a research assistant: *"read this paper, use this repo, find what's missing, and fix it."*
+
+> Mix and match: `ref paper` only = "what can be improved?", `base repo` only = "what can I build with this code?", both = "improve *this* paper using *this* code."
 
 **After acceptance** — your paper is in, now prepare the presentation:
 
