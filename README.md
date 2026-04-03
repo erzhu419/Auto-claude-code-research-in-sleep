@@ -4,7 +4,7 @@
 
 🔥 [**ARIS-Code CLI — 独立安装版**](docs/ARIS-Code-README_CN.md) · [English](docs/ARIS-Code-README_EN.md) | [⬇️ Download](https://github.com/wanshuiyin/Auto-claude-code-research-in-sleep/releases/latest)
 
-> 📰 **ARIS-Code v0.2.1** (2026-04-03) — 🧠 Persistent Memory · cross-session context | 🔧 Kimi K2.5 multi-turn fix | 🈶 CJK cursor fix | 📦 Banner box frame
+> 📰 **ARIS-Code v0.2.1** (2026-04-03) — Persistent Memory (cross-session context) | Kimi K2.5 multi-turn fix | CJK cursor fix | Banner box frame
 >
 > <details><summary>Previous versions</summary>
 >
