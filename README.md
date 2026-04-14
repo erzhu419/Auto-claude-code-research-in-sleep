@@ -1090,6 +1090,7 @@ export OPENAI_API_KEY="your-key"
 | 🔎 [`semantic-scholar`](skills/semantic-scholar/SKILL.md) | Search published venue papers (IEEE, ACM, Springer) via Semantic Scholar API. Citation counts, venue metadata, TLDR | No |
 | 📚 [`deepxiv`](skills/deepxiv/SKILL.md) | Progressive paper retrieval via DeepXiv CLI: search, brief, section map, section reads, trending, web search | Yes (`pip install deepxiv-sdk`) |
 | 🔎 [`exa-search`](skills/exa-search/SKILL.md) | AI-powered broad web search via Exa: blogs, docs, news, companies, research papers with content extraction (highlights, text, summaries) | Yes (`pip install exa-py`) |
+| 📝 [`alphaxiv`](skills/alphaxiv/SKILL.md) | Quick single-paper lookup via [AlphaXiv](https://alphaxiv.org) LLM-optimized summaries. Three-tier fallback: overview → full markdown → LaTeX source | No |
 | 🎨 [`pixel-art`](skills/pixel-art/SKILL.md) | Generate pixel art SVG illustrations for READMEs, docs, or slides | No |
 | 📱 [`feishu-notify`](skills/feishu-notify/SKILL.md) | [Feishu/Lark](#-feishulark-integration-optional) push (webhook) or interactive (bidirectional). Off by default | No |
 
